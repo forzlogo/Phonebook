@@ -19,8 +19,8 @@ void Contact::SetPhone(const std::string& phone) { phone_ = phone; }
 void Contact::SetEmail(const std::string& email) { email_ = email; }
 
 void Contact::Display() const {
-    std::cout << "Èìÿ: " << name_
-        << "\nÒåëåôîí: " << phone_
+    std::cout << "Ð˜Ð¼Ñ: " << name_
+        << "\nÐ¢ÐµÐ»ÐµÑ„Ð¾Ð½: " << phone_
         << "\nEmail: " << email_
         << "\n-------------------------\n";
 }
@@ -53,4 +53,5 @@ std::istream& operator>>(std::istream& is, Contact& contact) {
     std::getline(is, contact.phone_, ',');
     std::getline(is, contact.email_);
     return is;
+
 }
