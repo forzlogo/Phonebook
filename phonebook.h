@@ -1,33 +1,43 @@
-#ifndef PHONEBOOK_H
-#define PHONEBOOK_H
+#ifndef PHONEBOOK_H_
+#define PHONEBOOK_H_
+
 #include <string>
 #include <vector>
 #include "contact.h"
 
-class PhoneBook {
-public:
-    explicit PhoneBook(const std::string& filename = "contacts.txt");
-
-    void AddContact();
-    void RemoveContact();
-    void EditContact();
-    void SearchByName() const;
-    void SortByName();
-    void DisplayAll() const;
-    int GetContactCount() const;
-
-    bool SaveToFile() const;
-    bool LoadFromFile();
-    bool ExportToFile(const std::string& export_filename) const;
-    bool ImportFromFile(const std::string& import_filename);
-
-    void SetFilename(const std::string& filename);
-    std::string GetFilename() const;
-private:
-    bool IsValidEmail(const std::string& email) const;
-    bool IsValidPhone(const std::string& phone) const;
-
-    std::vector<Contact> contacts_;
-    std::string filename_;
+struct PhoneBook {
+    std::vector<Contact> contacts;
+    std::string filename;
 };
-#endif
+
+PhoneBook CreatePhoneBook(const std::string& filename);
+
+bool LoadPhoneBookFromFile(PhoneBook* phone_book);
+
+bool SavePhoneBookToFile(const PhoneBook& phone_book);
+
+bool ExportPhoneBookToFile(const PhoneBook& phone_book,
+    const std::string& export_filename);
+
+bool ImportContactsToPhoneBook(PhoneBook* phone_book,
+    const std::string& import_filename);
+
+void AddContactToPhoneBook(PhoneBook* phone_book);
+
+void RemoveContactFromPhoneBook(PhoneBook* phone_book);
+
+void EditContactInPhoneBook(PhoneBook* phone_book);
+
+void SearchInPhoneBook(const PhoneBook& phone_book);
+
+void SortPhoneBook(PhoneBook* phone_book);
+
+void DisplayAllContacts(const PhoneBook& phone_book);
+
+void DisplayMainMenu(const PhoneBook& phone_book);
+
+void DisplayFileMenu();
+
+void HandleFileMenu(PhoneBook* phone_book);
+
+#endif  // PHONEBOOK_H_
