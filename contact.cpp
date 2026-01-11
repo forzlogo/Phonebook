@@ -1,32 +1,32 @@
 #include "contact.h"
 #include <algorithm>
 #include <cctype>
-#include <windows.h>
+#include <iostream>
 
-Contact::Contact() : name_(""), phone_(""), email_("") {}
-
-Contact::Contact(const std::string& name, const std::string& phone,
-    const std::string& email)
-    : name_(name), phone_(phone), email_(email) {
+Contact CreateContact(const std::string& name,
+    const std::string& phone,
+    const std::string& email) {
+    Contact contact;
+    contact.name = name;
+    contact.phone = phone;
+    contact.email = email;
+    return contact;
 }
 
-std::string Contact::GetName() const { return name_; }
-std::string Contact::GetPhone() const { return phone_; }
-std::string Contact::GetEmail() const { return email_; }
-
-void Contact::SetName(const std::string& name) { name_ = name; }
-void Contact::SetPhone(const std::string& phone) { phone_ = phone; }
-void Contact::SetEmail(const std::string& email) { email_ = email; }
-
-void Contact::Display() const {
-    std::cout << "Имя: " << name_
-        << "\nТелефон: " << phone_
-        << "\nEmail: " << email_
+void DisplayContact(const Contact& contact) {
+    std::cout << "Имя: " << contact.name
+        << "\nТелефон: " << contact.phone
+        << "\nEmail: " << contact.email
         << "\n-------------------------\n";
 }
 
-bool Contact::ContainsName(const std::string& search_string) const {
-    std::string lower_name = name_;
+bool CompareContactsByName(const Contact& a, const Contact& b) {
+    return a.name < b.name;
+}
+
+bool ContactContainsName(const Contact& contact,
+    const std::string& search_string) {
+    std::string lower_name = contact.name;
     std::string lower_search = search_string;
 
     for (char& c : lower_name) {
@@ -37,21 +37,4 @@ bool Contact::ContainsName(const std::string& search_string) const {
     }
 
     return lower_name.find(lower_search) != std::string::npos;
-}
-
-bool Contact::operator<(const Contact& other) const {
-    return name_ < other.name_;
-}
-
-std::ostream& operator<<(std::ostream& os, const Contact& contact) {
-    os << contact.name_ << "," << contact.phone_ << "," << contact.email_;
-    return os;
-}
-
-std::istream& operator>>(std::istream& is, Contact& contact) {
-    std::getline(is, contact.name_, ',');
-    std::getline(is, contact.phone_, ',');
-    std::getline(is, contact.email_);
-    return is;
-
 }
