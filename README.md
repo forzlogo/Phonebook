@@ -36,6 +36,6 @@
 </div>
 
 <p>Создать проект</p>
-<p>Добавить файлы main.cpp, contact.cpp, contact.h, phonebook.cpp, phonebook.h </p>
+<p>Добавить файлы main.cpp, contact.cpp, contact.h, phonebook.cpp, phonebook.h, file_operations.cpp, file_operations.h, validation.cpp, validation.h </p>
 <p>Скомпилировать проект</p>
 </div>
